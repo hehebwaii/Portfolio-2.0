@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  --color-bg: #F4F4F0;
+  --color-text: #000000;
+  --color-accent: #FF3B30; /* Adding a red accent for punchiness */
+  --border-thick: 3px solid #000000;
+  --shadow-brutal: 5px 5px 0px 0px #000000;
+  --shadow-brutal-hover: 8px 8px 0px 0px #000000;
+  --radius-sharp: 0px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Lenis smooth scrolling prevents native scroll behavior on html occasionally, but this is safe */
+}
+
+* {
+  cursor: auto;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* Fallbacks for inputs */
+input, textarea, .cursor-text-override {
+  cursor: text !important;
+}
+
+/* Overclock Theme */
+body.theme-overclock {
+  --color-bg: #000000;
+  --color-text: #FFFFFF;
+  --color-accent: #00FF41;
+  --border-thick: 3px solid #00FF41;
+  --shadow-brutal: 5px 5px 0px 0px #00FF41;
+  --shadow-brutal-hover: 8px 8px 0px 0px #00FF41;
+}
+
+body.theme-overclock .card {
+  background-color: #111111;
+}
+
+body.theme-overclock .btn {
+  background-color: #111111;
+}
+
+body.theme-overclock .btn-primary {
+  background-color: #00FF41;
+  color: #000000;
+  box-shadow: 5px 5px 0px 0px #FFFFFF;
+}
+
+body.theme-overclock .btn-primary:active {
+  box-shadow: 3px 3px 0px 0px #FFFFFF;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Utilities */
+.card {
+  background-color: #FFFFFF;
+  border: var(--border-thick);
+  border-radius: var(--radius-sharp);
+  box-shadow: var(--shadow-brutal);
+  padding: 2rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-brutal-hover);
+  transform: translate(-3px, -3px);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #FFFFFF;
+  color: var(--color-text);
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border: var(--border-thick);
+  border-radius: var(--radius-sharp);
+  box-shadow: var(--shadow-brutal);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0px 0px #000000;
+}
+
+.btn-primary {
+  background-color: #000000;
+  color: #FFFFFF;
+  box-shadow: 5px 5px 0px 0px var(--color-accent);
+}
+
+.btn-primary:active {
+  box-shadow: 3px 3px 0px 0px var(--color-accent);
+}
+
+.section {
+  min-height: 100vh;
+  padding: 6rem 5%;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  scroll-margin-top: 100px;
+}
+
+/* Custom Cursor Dot */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-accent);
+  border-radius: 0px;
+  pointer-events: none;
+  z-index: 999999;
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+}
+
+.custom-cursor-dot.hover-active {
+  width: 24px;
+  height: 24px;
+}
+
+/* Specific component styles */
+.hero-title {
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: -0.05em;
+  margin-bottom: 2rem;
+  max-width: 90%;
+}
+
+.terminal-status {
+  background: var(--color-text);
+  color: #00FF41;
+  padding: 1rem 2rem;
+  border: var(--border-thick);
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.grid-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: var(--border-thick);
+}
+
+/* Contribution Graph */
+.contribution-grid {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  gap: 4px;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.contribution-cell {
+  aspect-ratio: 1;
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: #e0e0e0;
+}
+
+.contribution-cell.active {
+  background-color: #000000;
+  border: 1px solid #000000;
+}
+
+/* 
+=============================================
+HARDWARE STATUS LEDS (PHASE 8 PURE CSS)
+=============================================
+*/
+
+.status-led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.6);
+  border: 1px solid #000;
+  display: inline-block;
+}
+
+.led-default {
+  background-color: #00FF41;
+  animation: led-pulse-slow 2s infinite ease-in-out;
+}
+
+.led-active {
+  background-color: #FFB000;
+  animation: led-pulse-strobe 0.2s infinite steps(2, start);
+}
+
+.led-darkroom {
+  background-color: #FF0000;
+  /* Solid state - no animation */
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.6), 0 0 10px #FF0000;
+}
+
+@keyframes led-pulse-slow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.6), 0 0 10px #00FF41; }
+}
+
+@keyframes led-pulse-strobe {
+  0% { opacity: 1; box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.6), 0 0 15px #FFB000; }
+  100% { opacity: 0.1; }
+}
