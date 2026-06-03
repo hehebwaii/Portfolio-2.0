@@ -96,7 +96,10 @@ fragment PortfolioParts on Portfolio {
       url
     }
   }
-  sectionOrder
+  sectionOrder {
+    __typename
+    sectionKey
+  }
   timeline {
     __typename
     sectionHeading

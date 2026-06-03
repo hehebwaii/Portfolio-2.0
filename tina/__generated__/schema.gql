@@ -190,6 +190,10 @@ type PortfolioFooter {
   socialLinks: [PortfolioFooterSocialLinks]
 }
 
+type PortfolioSectionOrder {
+  sectionKey: String
+}
+
 type PortfolioTimelineItems {
   id: String
   title: String
@@ -245,7 +249,7 @@ type Portfolio implements Node & Document {
   devHud: PortfolioDevHud
   cameraSequence: PortfolioCameraSequence
   footer: PortfolioFooter
-  sectionOrder: [String]
+  sectionOrder: [PortfolioSectionOrder]
   timeline: PortfolioTimeline
   aboutProfile: PortfolioAboutProfile
   filmstrip: PortfolioFilmstrip
@@ -375,6 +379,10 @@ input PortfolioFooterFilter {
   socialLinks: PortfolioFooterSocialLinksFilter
 }
 
+input PortfolioSectionOrderFilter {
+  sectionKey: StringFilter
+}
+
 input BooleanFilter {
   eq: Boolean
   exists: Boolean
@@ -442,7 +450,7 @@ input PortfolioFilter {
   devHud: PortfolioDevHudFilter
   cameraSequence: PortfolioCameraSequenceFilter
   footer: PortfolioFooterFilter
-  sectionOrder: StringFilter
+  sectionOrder: PortfolioSectionOrderFilter
   timeline: PortfolioTimelineFilter
   aboutProfile: PortfolioAboutProfileFilter
   filmstrip: PortfolioFilmstripFilter
@@ -582,6 +590,10 @@ input PortfolioFooterMutation {
   socialLinks: [PortfolioFooterSocialLinksMutation]
 }
 
+input PortfolioSectionOrderMutation {
+  sectionKey: String
+}
+
 input PortfolioTimelineItemsMutation {
   id: String
   title: String
@@ -637,7 +649,7 @@ input PortfolioMutation {
   devHud: PortfolioDevHudMutation
   cameraSequence: PortfolioCameraSequenceMutation
   footer: PortfolioFooterMutation
-  sectionOrder: [String]
+  sectionOrder: [PortfolioSectionOrderMutation]
   timeline: PortfolioTimelineMutation
   aboutProfile: PortfolioAboutProfileMutation
   filmstrip: PortfolioFilmstripMutation

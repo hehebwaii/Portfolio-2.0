@@ -218,9 +218,12 @@ export default function TinaWrapper(props: TinaWrapperProps) {
   };
 
   // 14. Section Order Settings
-  const sectionOrder = Array.isArray(portfolio.sectionOrder)
-    ? portfolio.sectionOrder.filter((o): o is string => typeof o === 'string')
-    : ['about', 'skills', 'timeline', 'canvas', 'services', 'projects', 'filmstrip', 'achievements'];
+  const sectionOrder = Array.isArray(portfolio.sectionOrder) && portfolio.sectionOrder.length > 0
+    ? portfolio.sectionOrder
+        .filter(Boolean)
+        .map((o: any) => o.sectionKey)
+        .filter((k): k is string => typeof k === 'string')
+    : ['hero', 'about', 'skills', 'timeline', 'canvas', 'services', 'projects', 'filmstrip', 'achievements'];
 
   return (
     <HomeClient

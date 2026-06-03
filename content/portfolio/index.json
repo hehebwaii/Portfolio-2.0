@@ -237,15 +237,19 @@
     ]
   },
   "sectionOrder": [
-    "skills",
-    "timeline",
-    "canvas",
-    "services",
-    "projects",
-    "filmstrip",
-    "achievements",
-    "hero",
-    "about"
+    {
+      "sectionKey": "hero"
+    },
+    {
+      "sectionKey": "about"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
   ],
   "timeline": {
     "sectionHeading": "Routing Connections",

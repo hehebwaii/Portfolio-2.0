@@ -191,20 +191,32 @@ var config_default = defineConfig({
             ]
           },
           {
-            type: "string",
+            type: "object",
             name: "sectionOrder",
             label: "Sections Render Order",
             list: true,
-            options: [
-              { value: "hero", label: "01. Hero Section" },
-              { value: "about", label: "02. Core Identity" },
-              { value: "skills", label: "03. Technical Capabilities" },
-              { value: "timeline", label: "04. Experience Timeline" },
-              { value: "services", label: "05. Services" },
-              { value: "projects", label: "06. Projects" },
-              { value: "canvas", label: "07. 3D Camera Scroll Sequence" },
-              { value: "filmstrip", label: "08. Film Strip" },
-              { value: "achievements", label: "09. Verified Benchmarks" }
+            ui: {
+              itemProps: (item) => {
+                return { label: item?.sectionKey ? `Section: ${item.sectionKey.toUpperCase()}` : "New Section" };
+              }
+            },
+            fields: [
+              {
+                type: "string",
+                name: "sectionKey",
+                label: "Section Key",
+                options: [
+                  { value: "hero", label: "01. Hero Section" },
+                  { value: "about", label: "02. Core Identity" },
+                  { value: "skills", label: "03. Technical Capabilities" },
+                  { value: "timeline", label: "04. Experience Timeline" },
+                  { value: "services", label: "05. Services" },
+                  { value: "projects", label: "06. Projects" },
+                  { value: "canvas", label: "07. 3D Camera Scroll Sequence" },
+                  { value: "filmstrip", label: "08. Film Strip" },
+                  { value: "achievements", label: "09. Verified Benchmarks" }
+                ]
+              }
             ]
           },
           {

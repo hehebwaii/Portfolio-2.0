@@ -104,7 +104,10 @@ export const PortfolioPartsFragmentDoc = gql`
       url
     }
   }
-  sectionOrder
+  sectionOrder {
+    __typename
+    sectionKey
+  }
   timeline {
     __typename
     sectionHeading
