@@ -10,13 +10,25 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(Draggable);
 }
 
-export default function DevHUD() {
+import type { DevHudData } from '@/app/page';
+
+interface DevHUDProps {
+  data: DevHudData;
+}
+
+export default function DevHUD({ data }: DevHUDProps) {
   const state = useAppStore();
 
+  const baseLatency = data?.sustainationBaseLatency ?? 24;
+  const nodesString = data?.sustainationHarvestNodes ?? "1,402 NODES";
+  const efficiencyString = data?.sustainationEfficiency ?? "98.4%";
+  const oscilloscopeBaseAmplitude = data?.oscilloscopeBaseAmplitude ?? 45;
+  const telemetryTable = data?.telemetryTable || [];
+
   // Sector A: Sustaination OS Telemetry State
-  const [latency, setLatency] = useState<number>(24);
-  const [nodesCount, setNodesCount] = useState<number>(1402);
-  const [efficiency, setEfficiency] = useState<number>(98.4);
+  const [latency, setLatency] = useState<number>(baseLatency);
+  const [nodesCountText, setNodesCountText] = useState<string>(nodesString);
+  const [efficiencyText, setEfficiencyText] = useState<string>(efficiencyString);
   const [cacheBanner, setCacheBanner] = useState<boolean>(false);
 
   // Sector B: Oscilloscope Waveform Rendering State
@@ -33,26 +45,37 @@ export default function DevHUD() {
   const phaseRef = useRef<number>(0);
   const draggableRef = useRef<any[]>([]);
 
+  // Synchronize state when props update
+  useEffect(() => {
+    setLatency(baseLatency);
+    setNodesCountText(nodesString);
+    setEfficiencyText(efficiencyString);
+  }, [baseLatency, nodesString, efficiencyString]);
+
   // Telemetry Interval Loop (Sector A) - Fluctuates every 800ms
   useEffect(() => {
     if (!state.isDevMode) return;
 
+    const baseNodesNum = parseInt(nodesString.replace(/,/g, ''), 10) || 1402;
+    const baseEffNum = parseFloat(efficiencyString.replace(/%/g, '')) || 98.4;
+
     const telemetryInterval = setInterval(() => {
-      // FIRESTORE DB SYNC LATENCY: random bounce between 18ms and 32ms
-      setLatency(Math.floor(Math.random() * (32 - 18 + 1)) + 18);
+      const latencyDrift = Math.floor(Math.random() * 11) - 5; // -5 to +5 ms
+      setLatency(Math.max(1, baseLatency + latencyDrift));
       
-      // ACTIVE HARVEST NODES: 1,402 CLUSTERS with secondary integer noise +/- 4
-      setNodesCount(1402 + Math.floor(Math.random() * 9) - 4);
+      const nodesDrift = Math.floor(Math.random() * 9) - 4; // -4 to +4
+      const newNodes = baseNodesNum + nodesDrift;
+      setNodesCountText(`${newNodes.toLocaleString()} CLUSTERS`);
       
-      // SUSTAINABLE SOIL MATRIX RE-CALIBRATION: 98.4% EFFICIENCY with fractional drift +/- 0.15%
-      const drift = Math.random() * 0.3 - 0.15;
-      setEfficiency(Number((98.4 + drift).toFixed(2)));
+      const effDrift = Math.random() * 0.3 - 0.15;
+      const newEff = Number((baseEffNum + effDrift).toFixed(2));
+      setEfficiencyText(`${newEff}% EFFICIENCY`);
     }, 800);
 
     return () => {
       clearInterval(telemetryInterval);
     };
-  }, [state.isDevMode]);
+  }, [state.isDevMode, baseLatency, nodesString, efficiencyString]);
 
   // Container Scroll Tracking for Waveform Frequency Modulation
   useEffect(() => {
@@ -120,7 +143,7 @@ export default function DevHUD() {
       
       // Compute amplitude with mathematical random noise & speed expansion
       const noise = (Math.random() - 0.5) * 5;
-      const amp = 25 + noise + (mouseVelocityRef.current * 10);
+      const amp = oscilloscopeBaseAmplitude + noise + (mouseVelocityRef.current * 10);
 
       // Generate points array to translate into bezier curve commands
       const points: { x: number; y: number }[] = [];
@@ -223,7 +246,7 @@ export default function DevHUD() {
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 9998,
+        zIndex: 99999,
         backgroundColor: '#0D0D0D',
         color: '#00FF41',
         fontFamily: "'JetBrains Mono', monospace",
@@ -490,12 +513,12 @@ export default function DevHUD() {
               <div>
                 &gt; ACTIVE HARVEST NODES:{' '}
                 <span style={{ color: '#FFFFFF', fontWeight: 900 }}>
-                  {nodesCount.toLocaleString()} CLUSTERS
+                  {nodesCountText}
                 </span>
               </div>
               <div>
                 &gt; SUSTAINABLE SOIL MATRIX RE-CALIBRATION:{' '}
-                <span style={{ color: '#FFFFFF', fontWeight: 900 }}>{efficiency.toFixed(2)}% EFFICIENCY</span>
+                <span style={{ color: '#FFFFFF', fontWeight: 900 }}>{efficiencyText}</span>
               </div>
             </div>
 
@@ -905,70 +928,40 @@ export default function DevHUD() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style={{ borderBottom: '2px solid #222' }}>
-                    <td
-                      style={{
-                        border: '2px solid #222',
-                        padding: '10px 12px',
-                        fontWeight: 900,
-                        color: '#00FF41',
-                      }}
-                    >
-                      IEEE WIE CORE
-                    </td>
-                    <td
-                      style={{
-                        border: '2px solid #222',
-                        padding: '10px 12px',
-                        color: '#AAAAAA',
-                      }}
-                    >
-                      MEMBERSHIP DEVELOPMENT ONBOARDING: ACTIVE // CLUSTER NODE: 2026-2027 REGION
-                    </td>
-                    <td
-                      style={{
-                        border: '2px solid #222',
-                        padding: '10px 12px',
-                        color: '#00FF41',
-                        fontWeight: 900,
-                        textAlign: 'center',
-                      }}
-                    >
-                      ACTIVE
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{
-                        border: '2px solid #222',
-                        padding: '10px 12px',
-                        fontWeight: 900,
-                        color: '#00FF41',
-                      }}
-                    >
-                      ENIX EXECUTIVE COMMS
-                    </td>
-                    <td
-                      style={{
-                        border: '2px solid #222',
-                        padding: '10px 12px',
-                        color: '#AAAAAA',
-                      }}
-                    >
-                      TECH FEST ARCHITECTURE: COORDINATION LOCK // FREQUENCY: STABLE
-                    </td>
-                    <td
-                      style={{
-                        border: '2px solid #222',
-                        padding: '10px 12px',
-                        color: '#FFB000',
-                        fontWeight: 900,
-                        textAlign: 'center',
-                      }}
-                    >
-                      LOCKED
-                    </td>
-                  </tr>
+                  {telemetryTable.map((row, idx) => (
+                    <tr key={idx} style={{ borderBottom: idx < telemetryTable.length - 1 ? '2px solid #222' : 'none' }}>
+                      <td
+                        style={{
+                          border: '2px solid #222',
+                          padding: '10px 12px',
+                          fontWeight: 900,
+                          color: '#00FF41',
+                        }}
+                      >
+                        {row.coreName}
+                      </td>
+                      <td
+                        style={{
+                          border: '2px solid #222',
+                          padding: '10px 12px',
+                          color: '#AAAAAA',
+                        }}
+                      >
+                        {row.telemetryDetails}
+                      </td>
+                      <td
+                        style={{
+                          border: '2px solid #222',
+                          padding: '10px 12px',
+                          color: idx === 0 ? '#00FF41' : '#FFB000',
+                          fontWeight: 900,
+                          textAlign: 'center',
+                        }}
+                      >
+                        {idx === 0 ? 'ACTIVE' : 'LOCKED'}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

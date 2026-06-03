@@ -1,7 +1,12 @@
 import React from 'react';
 import { MapPin, Link2, Languages } from 'lucide-react';
+import type { AboutProfileData } from '@/app/page';
 
-export default function AboutProfile() {
+interface AboutProfileProps {
+  data: AboutProfileData;
+}
+
+export default function AboutProfile({ data }: AboutProfileProps) {
   return (
     <section id="about" className="section" style={{ borderTop: 'var(--border-thick)', backgroundColor: 'var(--color-bg)' }}>
       <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>01. Core Identity</h2>
@@ -18,7 +23,7 @@ export default function AboutProfile() {
               <MapPin size={24} style={{ marginTop: '0.2rem', minWidth: '24px' }} />
               <div>
                 <strong style={{ display: 'block', fontSize: '1.2rem', textTransform: 'uppercase' }}>Location</strong>
-                <span className="font-mono" style={{ fontSize: '1rem' }}>Thiruvananthapuram, Kerala</span>
+                <span className="font-mono" style={{ fontSize: '1rem' }}>{data.location}</span>
               </div>
             </li>
             
@@ -26,8 +31,8 @@ export default function AboutProfile() {
               <Link2 size={24} style={{ marginTop: '0.2rem', minWidth: '24px' }} />
               <div>
                 <strong style={{ display: 'block', fontSize: '1.2rem', textTransform: 'uppercase' }}>Network</strong>
-                <a href="https://linkedin.com/in/niranjanss/" target="_blank" rel="noopener noreferrer" className="font-mono" style={{ fontSize: '1rem', color: 'inherit' }}>
-                  linkedin.com/in/niranjanss/
+                <a href={data.networkUrl} target="_blank" rel="noopener noreferrer" className="font-mono" style={{ fontSize: '1rem', color: 'inherit' }}>
+                  {data.networkLabel}
                 </a>
               </div>
             </li>
@@ -37,8 +42,7 @@ export default function AboutProfile() {
               <div>
                 <strong style={{ display: 'block', fontSize: '1.2rem', textTransform: 'uppercase' }}>Languages</strong>
                 <span className="font-mono" style={{ fontSize: '1rem' }}>
-                  Malayalam, Tamil, Hindi, English<br/>
-                  (Native & Fluent)
+                  {data.languages.join(', ')}
                 </span>
               </div>
             </li>
@@ -54,7 +58,7 @@ export default function AboutProfile() {
             letterSpacing: '-0.02em',
             textTransform: 'uppercase'
           }}>
-            I don't just build systems; I engineer experiences. Rooted in Electronics and Communication at MBCET, my work bridges the rigid logic of hardware with the fluid creativity of visual storytelling. Whether I am architecting software infrastructure, capturing raw emotion through a camera lens, or mobilizing communities for a cause, I am driven by one simple metric: <span style={{ color: 'var(--color-accent)' }}>leaving a meaningful, lasting impact.</span>
+            {data.story}
           </p>
         </div>
       </div>

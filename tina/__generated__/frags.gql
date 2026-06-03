@@ -1,0 +1,142 @@
+fragment PortfolioParts on Portfolio {
+  __typename
+  biosBoot {
+    __typename
+    kernelVersion
+    diagnosticLines
+    completionTime
+    copyrightText
+    loadingText
+    loadedText
+    energyStarText
+  }
+  navigationSettings {
+    __typename
+    logoText
+    navLinks {
+      __typename
+      label
+      slug
+    }
+  }
+  hero {
+    __typename
+    mainTitle
+    subtitle
+    signatureSvgPath
+    signatureScaleMobile
+    signatureScaleDesktop
+  }
+  services {
+    __typename
+    sectionHeading
+    items {
+      __typename
+      index
+      title
+      description
+    }
+  }
+  projects {
+    __typename
+    sectionHeading
+    cards {
+      __typename
+      index
+      name
+      category
+      description
+      liveUrl
+      col1Image1
+      col1Image2
+      col2TallImage
+    }
+  }
+  skillsMatrix {
+    __typename
+    sectionHeading
+    skillCategories {
+      __typename
+      categoryName
+      skills {
+        __typename
+        name
+        level
+      }
+    }
+  }
+  devHud {
+    __typename
+    sustainationBaseLatency
+    sustainationHarvestNodes
+    sustainationEfficiency
+    oscilloscopeBaseAmplitude
+    telemetryTable {
+      __typename
+      coreName
+      telemetryDetails
+    }
+  }
+  cameraSequence {
+    __typename
+    totalFrames
+    act1Title
+    act1Subtitle
+    act2Title
+    act2Subtitle
+    act3Title
+    act3Subtitle
+  }
+  footer {
+    __typename
+    copyrightText
+    socialLinks {
+      __typename
+      platformName
+      url
+    }
+  }
+  sectionOrder
+  timeline {
+    __typename
+    sectionHeading
+    items {
+      __typename
+      id
+      title
+      date
+      active
+      detail
+    }
+  }
+  aboutProfile {
+    __typename
+    location
+    networkLabel
+    networkUrl
+    languages
+    story
+  }
+  filmstrip {
+    __typename
+    heading
+    photos {
+      __typename
+      url
+      title
+      backstory
+      gear
+      settings
+    }
+  }
+  achievements {
+    __typename
+    heading
+    benchmarks {
+      __typename
+      title
+      date
+      description
+    }
+  }
+}

@@ -6,7 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAppStore } from '@/store/useAppStore';
 import CustomCursor from './CustomCursor';
 import TerminalOverlay from './TerminalOverlay';
-import DevHUD from './DevHUD';
 import dynamic from 'next/dynamic';
 import SettingsDock from './SettingsDock';
 import ImageModal from './ImageModal';
@@ -57,7 +56,6 @@ export default function ClientLayoutManager() {
       )}
       <CustomCursor />
       <TerminalOverlay />
-      <DevHUD />
       <SettingsDock />
       <ImageModal />
     </>

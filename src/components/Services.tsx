@@ -1,72 +1,15 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FadeIn } from '@/components/shared/DesignSystem';
-import { client } from '@/sanity/lib/client';
+import type { ServicesData } from '@/app/page';
 
-const DEFAULT_SERVICES = [
-  {
-    number: '01', // maps to index
-    title: 'Photography & Visual Production',
-    description:
-      'High-resolution commercial and editorial photography. From environmental portraits to product captures — delivering calibrated sensor data through Sony α6400 optics.',
-  },
-  {
-    number: '02',
-    title: 'Frontend Engineering',
-    description:
-      'Performance-first web interfaces built with React, Next.js, and TypeScript. Hardware-accelerated animations, scroll-driven experiences, and responsive design systems.',
-  },
-  {
-    number: '03',
-    title: 'UI/UX Design & Prototyping',
-    description:
-      'Figma-native design workflows producing interactive prototypes, component libraries, and design tokens that translate directly into production code.',
-  },
-  {
-    number: '04',
-    title: 'Embedded Systems & IoT',
-    description:
-      'Firmware development across Arduino and STM32 platforms. Sensor integration, circuit design, and real-time data acquisition systems for physical computing.',
-  },
-  {
-    number: '05',
-    title: 'Creative Direction & Branding',
-    description:
-      'End-to-end visual identity systems — from typography selection and color science to motion language guidelines and cross-platform brand consistency.',
-  },
-];
+interface ServicesProps {
+  data: ServicesData;
+}
 
-export default function Services() {
-  const [services, setServices] = useState<Array<{ number: string; title: string; description: string }>>([]);
-
-  useEffect(() => {
-    let isMounted = true;
-    client.fetch(`*[_type == "services"][0]`)
-      .then((data) => {
-        if (data && Array.isArray(data.items) && data.items.length > 0 && isMounted) {
-          const mapped = data.items.map((item: any) => ({
-            number: item.index || '00',
-            title: item.title || '',
-            description: item.description || '',
-          }));
-          setServices(mapped);
-        } else if (isMounted) {
-          // Fallback if document is empty
-          setServices(DEFAULT_SERVICES);
-        }
-      })
-      .catch((err) => {
-        console.error("Sanity fetch failed in Services, using local fallbacks:", err);
-        if (isMounted) {
-          setServices(DEFAULT_SERVICES);
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+export default function Services({ data }: ServicesProps) {
+  const { sectionHeading, items } = data;
 
   return (
     <section
@@ -100,7 +43,7 @@ export default function Services() {
             margin: 0,
           }}
         >
-          Services
+          {sectionHeading}
         </h2>
         <p
           className="font-mono"
@@ -125,7 +68,7 @@ export default function Services() {
           flexDirection: 'column',
         }}
       >
-        {services.map((service, i) => (
+        {items.map((service, i) => (
           <FadeIn key={i} delay={i * 0.1}>
             <div
               className="service-row"
@@ -135,7 +78,6 @@ export default function Services() {
                 padding: 'clamp(1.5rem, 3vw, 2.5rem) 0',
               }}
             >
-              {/* Inner Flex */}
               <div
                 className="service-row-inner"
                 style={{
@@ -144,7 +86,6 @@ export default function Services() {
                   gap: 'clamp(1.5rem, 4vw, 3rem)',
                 }}
               >
-                {/* Giant Number */}
                 <span
                   className="font-mono service-number"
                   style={{
@@ -158,10 +99,9 @@ export default function Services() {
                     transition: 'color 0.3s ease',
                   }}
                 >
-                  {service.number}
+                  {service.index}
                 </span>
 
-                {/* Service Content */}
                 <div
                   style={{
                     display: 'flex',

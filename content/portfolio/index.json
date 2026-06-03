@@ -1,0 +1,368 @@
+{
+  "biosBoot": {
+    "kernelVersion": "SYSTEM: KERNEL v2.0.26 ASSEMBLY",
+    "diagnosticLines": [
+      "HARDWARE: SONY ILCE-6400 SYSTEM INIT ... OK",
+      "NETWORK: SYSTEMS ... ALIGNED",
+      "COMMUNICATIONS: COMM LOCK ... STABLE",
+      "DATABASE: FIRESTORE SYNC ... OK",
+      "DATA: ESTABLISHING TINA CMS LOCAL LINK ... OK"
+    ],
+    "completionTime": 2500,
+    "copyrightText": "COPYRIGHT (C) 2026 SYS.N SYSTEMS CO. ALL RIGHTS RESERVED.",
+    "loadingText": "RUNNING HARDWARE CHECK... STATUS: ",
+    "loadedText": "SYSTEM INITIALIZATION COMPLETE. DISPATCHING SCROLL_UNLOCK...",
+    "energyStarText": "ENERGY STAR\n___________\nNIRANJAN S S\nSYSTEMS ENG."
+  },
+  "navigationSettings": {
+    "logoText": "SYS.N",
+    "navLinks": [
+      {
+        "label": "Identity",
+        "slug": "#about"
+      },
+      {
+        "label": "Skills",
+        "slug": "#skills"
+      },
+      {
+        "label": "Timeline",
+        "slug": "#experience"
+      },
+      {
+        "label": "SERVICES",
+        "slug": "#services"
+      },
+      {
+        "label": "Projects",
+        "slug": "#projects"
+      },
+      {
+        "label": "Lens",
+        "slug": "#photography"
+      },
+      {
+        "label": "Contact",
+        "slug": "#contact"
+      }
+    ]
+  },
+  "hero": {
+    "mainTitle": "NIRANJAN S S",
+    "subtitle": "Second-year B.Tech ECE undergraduate bridging systems design with interactive media pipelines.",
+    "signatureSvgPath": "M 10 80 Q 52.5 10, 95 80 T 180 80",
+    "signatureScaleMobile": 80,
+    "signatureScaleDesktop": 300
+  },
+  "services": {
+    "sectionHeading": "SERVICES",
+    "items": [
+      {
+        "index": "01",
+        "title": "Photography & Visual Production",
+        "description": "High-resolution commercial and editorial photography. From environmental portraits to product captures — delivering calibrated sensor data through Sony α6400 optics."
+      },
+      {
+        "index": "02",
+        "title": "Frontend Engineering",
+        "description": "Performance-first web interfaces built with React, Next.js, and TypeScript. Hardware-accelerated animations, scroll-driven experiences, and responsive design systems."
+      },
+      {
+        "index": "03",
+        "title": "VIDEO PRODUCTION",
+        "description": "Designing and deploying robust videos curated to the viewer's taste."
+      },
+      {
+        "index": "04",
+        "title": "COMMUNITY LEADERSHIP",
+        "description": "Orchestrating technical fests, managing executive committees, and driving membership development initiatives."
+      },
+      {
+        "index": "05",
+        "title": "Creative Direction & Branding",
+        "description": "End-to-end visual identity systems — from typography selection and color science to motion language guidelines and cross-platform brand consistency."
+      }
+    ]
+  },
+  "projects": {
+    "sectionHeading": "PROJECTS",
+    "cards": [
+      {
+        "index": "01",
+        "name": "PORTFOLIO CORE v2.0",
+        "category": "Systems Architecture",
+        "description": "Neo-Brutalist developer portfolio featuring GSAP scroll-bound animations and CRT shader effects.",
+        "liveUrl": "https://github.com",
+        "col1Image1": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+        "col1Image2": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=600&q=80",
+        "col2TallImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "index": "02",
+        "name": "SUSTAINATION PLATFORM",
+        "category": "Smart India Hackathon",
+        "description": "A sustainability-focused social platform designed to track and gamify eco-conscious habits.",
+        "liveUrl": "https://github.com",
+        "col1Image1": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=80",
+        "col1Image2": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=600&q=80",
+        "col2TallImage": "https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "skillsMatrix": {
+    "sectionHeading": "TECHNICAL CAPABILITIES",
+    "skillCategories": [
+      {
+        "categoryName": "MEDIA PRODUCTION",
+        "skills": [
+          {
+            "name": "Current Gear Expertise",
+            "level": 98
+          },
+          {
+            "name": "Color Grading",
+            "level": 95
+          },
+          {
+            "name": "Composition",
+            "level": 95
+          },
+          {
+            "name": "Light correction",
+            "level": 95
+          }
+        ]
+      },
+      {
+        "categoryName": "HARDWARE & ECE",
+        "skills": [
+          {
+            "name": "Circuit Architecture",
+            "level": 85
+          },
+          {
+            "name": "Solid State Devices",
+            "level": 78
+          },
+          {
+            "name": "Signal Processing",
+            "level": 82
+          },
+          {
+            "name": "Microcontroller Systems",
+            "level": 78
+          }
+        ]
+      },
+      {
+        "categoryName": "LEADERSHIP",
+        "skills": [
+          {
+            "name": "IEEE Membership Coordination",
+            "level": 95
+          },
+          {
+            "name": "ENIX EXECOM",
+            "level": 92
+          },
+          {
+            "name": "Tech Fest Management",
+            "level": 90
+          },
+          {
+            "name": "NSS Blood Donation",
+            "level": 97
+          }
+        ]
+      },
+      {
+        "categoryName": "LANGUAGES & WEB",
+        "skills": [
+          {
+            "name": "React & Next.js",
+            "level": 70
+          },
+          {
+            "name": "JavaScript/TypeScript",
+            "level": 70
+          },
+          {
+            "name": "Firebase/Firestore",
+            "level": 65
+          },
+          {
+            "name": "C",
+            "level": 90
+          }
+        ]
+      }
+    ]
+  },
+  "devHud": {
+    "sustainationBaseLatency": 24,
+    "sustainationHarvestNodes": "1,402 NODES",
+    "sustainationEfficiency": "98.4%",
+    "oscilloscopeBaseAmplitude": 45,
+    "telemetryTable": [
+      {
+        "coreName": "IEEE WIE CORE",
+        "telemetryDetails": "MEMBERSHIP DEVELOPMENT ONBOARDING: ACTIVE"
+      },
+      {
+        "coreName": "ENIX EXECUTIVE COMMS",
+        "telemetryDetails": "TECH FEST ARCHITECTURE: COORDINATION LOCK"
+      }
+    ]
+  },
+  "cameraSequence": {
+    "totalFrames": 192,
+    "act1Title": "01 // THE SENSOR MATRIX — SONY α6400",
+    "act1Subtitle": "An engineering baseline capturing raw ambient data at 24.2 megapixels.",
+    "act2Title": "02 // TACTICAL FIELD SELECTION — E 16-50MM",
+    "act2Subtitle": "The everyday kit architecture built for split-second deployment.",
+    "act3Title": "03 // COMPOSITION GEOMETRY — VILTROX 20MM PRIME",
+    "act3Subtitle": "Ultra-wide narrative rendering at f/2.8."
+  },
+  "footer": {
+    "copyrightText": "© 2026 NIRANJAN S S. ALL RIGHTS RESERVED.",
+    "socialLinks": [
+      {
+        "platformName": "LinkedIn",
+        "url": "https://linkedin.com/in/niranjanss/"
+      },
+      {
+        "platformName": "GitHub",
+        "url": "https://github.com"
+      }
+    ]
+  },
+  "sectionOrder": [
+    "about",
+    "skills",
+    "timeline",
+    "canvas",
+    "services",
+    "projects",
+    "filmstrip",
+    "achievements"
+  ],
+  "timeline": {
+    "sectionHeading": "Routing Connections",
+    "items": [
+      {
+        "id": "btech",
+        "title": "B.Tech Electronics & Communication Engineering – College",
+        "date": "2023-2027",
+        "active": true,
+        "detail": "Pursuing undergraduate studies with a rigorous focus on hardware logic, embedded architecture, and full-stack software pipelines."
+      },
+      {
+        "id": "ieee",
+        "title": "Membership Development Coordinator – IEEE",
+        "date": "2026-Present",
+        "active": true,
+        "detail": "Architected promotional systems and scaled onboarding metrics across international organizational vectors."
+      },
+      {
+        "id": "enix",
+        "title": "Media Operations – eNIX",
+        "date": "2025-Present",
+        "active": true,
+        "detail": "Orchestrated visual identity for ECE's biggest installations from Elevate to Adharva. Negotiated and secured two key corporate institutional sponsorships."
+      },
+      {
+        "id": "nss",
+        "title": "Rudhirasena Unit Coordinator – NSS",
+        "date": "2026-Present",
+        "active": true,
+        "detail": "Strategized and coordinated urgent multi-unit blood donation lifelines directly to the Regional Cancer Centre (RCC) and SCT. Documented 4-time active donor."
+      },
+      {
+        "id": "frames",
+        "title": "Creative Curator – FRAMES",
+        "date": "2025-Present",
+        "active": true,
+        "detail": "Entrusted with capturing the pulse of flagship corporate and artistic events, translating fleeting moments at Crossroads into permanent visual legacies."
+      },
+      {
+        "id": "openlabs",
+        "title": "Media Team – OpenLabs AI Club",
+        "date": "Past Track",
+        "active": false,
+        "detail": "Managed media strategy, visual asset creation, and algorithmic design pipelines for emerging club ecosystems."
+      },
+      {
+        "id": "filmclub",
+        "title": "Execom Member – Film Club",
+        "date": "Past Track",
+        "active": false,
+        "detail": "Directed asset generation, cinematic layouts, and promotional framework coordination for institutional film media deployments."
+      },
+      {
+        "id": "tribe",
+        "title": "Emerging Professional – TRIBE IEDC",
+        "date": "2025-2026",
+        "active": false,
+        "detail": "Gained foundational structural alignment across layout design, field photography, and video post-production."
+      }
+    ]
+  },
+  "aboutProfile": {
+    "location": "THIRUVANANTHAPURAM, KERALA",
+    "networkLabel": "LINKEDIN UPLINK",
+    "networkUrl": "https://linkedin.com",
+    "languages": [
+      "C/C++",
+      "JavaScript",
+      "TypeScript",
+      "Python"
+    ],
+    "story": "Second-year B.Tech Electronics and Communication Engineering student at Mar Baselios College of Engineering and Technology. I bridge hardware systems with high-performance interactive web pipelines."
+  },
+  "filmstrip": {
+    "heading": "Capturing Reality",
+    "photos": [
+      {
+        "url": "https://freerangestock.com/sample/170504/abstract-view-of-brutalist-architecture.jpg",
+        "title": "CONCRETE MONOLITH",
+        "backstory": "Captured during the dead of winter. The raw concrete angles provided a perfect study of harsh shadows intersecting at 90-degree vectors.",
+        "gear": "Sony A7III + Tamron 28-75mm f/2.8",
+        "settings": "f/8 | 1/250s | ISO 100"
+      },
+      {
+        "url": "https://static.vecteezy.com/system/resources/previews/073/736/648/non_2x/detailed-macrograph-of-a-complex-green-printed-circuit-board-inside-an-electronic-device-highlighting-the-microchip-and-test-points-photo.jpg",
+        "title": "SILICON ARTERIES",
+        "backstory": "A macro dissection of an exposed motherboard. I wanted to map the copper traces as if they were a city grid viewed from low-earth orbit.",
+        "gear": "Nikon D850 + 105mm Macro",
+        "settings": "f/11 | 1.5s | ISO 64 | Tripod Mounted"
+      },
+      {
+        "url": "https://images.stockcake.com/public/9/d/9/9d9b68d6-feda-4e9d-9380-69790e34f056_large/strength-through-shadow-stockcake.jpg",
+        "title": "VECTOR SHADOWS",
+        "backstory": "Experimenting with intense single-source directional lighting to carve out the depth of the subject against an absolute black background.",
+        "gear": "Canon EOS R5 + RF 50mm f/1.2",
+        "settings": "f/4 | 1/125s | ISO 400 | Key Light 45°"
+      }
+    ]
+  },
+  "achievements": {
+    "heading": "MILESTONES",
+    "benchmarks": [
+      {
+        "title": "IEEE WIE Coordinator",
+        "date": "2026-2027",
+        "description": "Appointed as Membership Development Coordinator."
+      },
+      {
+        "title": "ENIX EXECOM",
+        "date": "March 2026",
+        "description": "Coordinated the departmental technical fest."
+      },
+      {
+        "title": "Smart India Hackathon",
+        "date": "September 2025",
+        "description": "Developed Sustaination, a gamified sustainable farming platform."
+      }
+    ]
+  }
+}

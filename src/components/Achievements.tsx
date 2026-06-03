@@ -3,21 +3,13 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import type { AchievementsData } from '@/app/page';
 
-const ACHIEVEMENTS_DATA = [
-  {
-    title: "State Level Qualifier — Young Innovators Programme",
-    date: "Feb 2026",
-    description: "A testament to pushing boundaries and building viable solutions."
-  },
-  {
-    title: "1st Place Champion — Frame-It Photography Competition",
-    date: "Apr 2026",
-    description: "Peer-reviewed validation of my creative eye and technical execution."
-  }
-];
+interface AchievementsProps {
+  data: AchievementsData;
+}
 
-export default function Achievements() {
+export default function Achievements({ data }: AchievementsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,14 +36,14 @@ export default function Achievements() {
     }, containerRef);
     
     return () => ctx.revert();
-  }, []);
+  }, [data.benchmarks]);
 
   return (
     <section id="achievements" className="section" style={{ borderTop: 'var(--border-thick)' }}>
-      <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>05. Verified Benchmarks</h2>
+      <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>{data.heading}</h2>
       
       <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        {ACHIEVEMENTS_DATA.map((item, index) => (
+        {data.benchmarks.map((item, index) => (
           <div 
             key={index}
             className="achievement-block card"

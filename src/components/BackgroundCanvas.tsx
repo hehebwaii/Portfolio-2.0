@@ -56,7 +56,7 @@ function ScrollTypography() {
       <Text 
         ref={eceRef as any}
         fontSize={2.5}
-        font="https://fonts.gstatic.com/s/jetbrainsmono/v18/tU3oM50yabcgM5TNLBD55lQ2.woff"
+        font="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.0/files/jetbrains-mono-latin-400-normal.woff"
         anchorX="center"
         anchorY="middle"
       >
@@ -67,7 +67,7 @@ function ScrollTypography() {
       <Text 
         ref={mbcetRef as any}
         fontSize={2.0}
-        font="https://fonts.gstatic.com/s/jetbrainsmono/v18/tU3oM50yabcgM5TNLBD55lQ2.woff"
+        font="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.0/files/jetbrains-mono-latin-400-normal.woff"
         anchorX="center"
         anchorY="middle"
       >
@@ -78,7 +78,7 @@ function ScrollTypography() {
       <Text 
         ref={y2026Ref as any}
         fontSize={2.2}
-        font="https://fonts.gstatic.com/s/jetbrainsmono/v18/tU3oM50yabcgM5TNLBD55lQ2.woff"
+        font="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.0/files/jetbrains-mono-latin-400-normal.woff"
         anchorX="center"
         anchorY="middle"
       >

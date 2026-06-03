@@ -1,22 +1,30 @@
 'use client';
 
 import React from 'react';
+import type { NavigationSettingsData } from '@/app/page';
 
-export default function Navbar() {
+interface NavbarProps {
+  data: NavigationSettingsData;
+}
+
+export default function Navbar({ data }: NavbarProps) {
+  const { logoText, navLinks } = data;
+
   return (
     <>
       <nav className="navbar-container">
         <div className="navbar-logo">
-          <a href="#" className="nav-link" style={{ color: 'inherit', textDecoration: 'none' }}>SYS.N</a>
+          <a href="#" className="nav-link logo-link" style={{ color: 'inherit', textDecoration: 'none' }}>
+            {logoText}
+          </a>
         </div>
         
         <div className="navbar-links">
-          <a href="#about" className="nav-link">Identity</a>
-          <a href="#skills" className="nav-link">Skills</a>
-          <a href="#experience" className="nav-link">Timeline</a>
-          <a href="#photography" className="nav-link">Lens</a>
-          <a href="#achievements" className="nav-link">Benchmarks</a>
-          <a href="#contact" className="nav-link">Contact</a>
+          {navLinks?.map((link, i) => (
+            <a key={i} href={link.slug} className="nav-link">
+              {link.label}
+            </a>
+          ))}
         </div>
       </nav>
 
@@ -31,7 +39,7 @@ export default function Navbar() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 1rem 2rem;
+          padding: 0.5rem 2rem;
           background-color: var(--color-bg);
           border: var(--border-thick);
           box-shadow: var(--shadow-brutal);
@@ -46,9 +54,16 @@ export default function Navbar() {
           flex-shrink: 0;
         }
 
+        .logo-link {
+          display: inline-flex;
+          align-items: center;
+          min-height: 48px;
+          min-width: 48px;
+        }
+
         .navbar-links {
           display: flex;
-          gap: clamp(0.4rem, 1.8vw, 2rem);
+          gap: clamp(0.2rem, 1vw, 1rem);
           align-items: center;
           font-weight: bold;
           flex-wrap: nowrap;
@@ -63,24 +78,29 @@ export default function Navbar() {
           text-transform: uppercase;
           white-space: nowrap;
           transition: opacity 0.2s;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 48px;
+          min-width: 48px;
+          padding: 0 0.5rem;
         }
 
         @media (max-width: 768px) {
           .navbar-container {
-            padding: 0.65rem 1rem !important;
+            padding: 0.25rem 1rem !important;
             top: 10px !important;
             width: 96% !important;
           }
           .navbar-links {
-            gap: clamp(0.35rem, 1.2vw, 0.8rem) !important;
+            gap: 0 !important;
           }
         }
 
         @media (max-width: 375px) {
-          /* Further tighten margins and scale down slightly on tiny viewports */
           .navbar-container {
             width: 98% !important;
-            padding: 0.5rem 0.75rem !important;
+            padding: 0.25rem 0.5rem !important;
           }
         }
       `}} />

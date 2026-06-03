@@ -3,32 +3,13 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useAppStore } from '@/store/useAppStore';
+import type { FilmstripData } from '@/app/page';
 
-const FILM_DATA = [
-  {
-    url: "https://freerangestock.com/sample/170504/abstract-view-of-brutalist-architecture.jpg",
-    title: "CONCRETE MONOLITH",
-    backstory: "Captured during the dead of winter. The raw concrete angles provided a perfect study of harsh shadows intersecting at 90-degree vectors.",
-    gear: "Sony A7III + Tamron 28-75mm f/2.8",
-    settings: "f/8 | 1/250s | ISO 100"
-  },
-  {
-    url: "https://static.vecteezy.com/system/resources/previews/073/736/648/non_2x/detailed-macrograph-of-a-complex-green-printed-circuit-board-inside-an-electronic-device-highlighting-the-microchip-and-test-points-photo.jpg",
-    title: "SILICON ARTERIES",
-    backstory: "A macro dissection of an exposed motherboard. I wanted to map the copper traces as if they were a city grid viewed from low-earth orbit.",
-    gear: "Nikon D850 + 105mm Macro",
-    settings: "f/11 | 1.5s | ISO 64 | Tripod Mounted"
-  },
-  {
-    url: "https://images.stockcake.com/public/9/d/9/9d9b68d6-feda-4e9d-9380-69790e34f056_large/strength-through-shadow-stockcake.jpg",
-    title: "VECTOR SHADOWS",
-    backstory: "Experimenting with intense single-source directional lighting to carve out the depth of the subject against an absolute black background.",
-    gear: "Canon EOS R5 + RF 50mm f/1.2",
-    settings: "f/4 | 1/125s | ISO 400 | Key Light 45°"
-  }
-];
+interface FilmStripProps {
+  data: FilmstripData;
+}
 
-export default function FilmStrip() {
+export default function FilmStrip({ data }: FilmStripProps) {
   const marqueeRef = useRef<HTMLDivElement>(null);
   const trackTopRef = useRef<HTMLDivElement>(null);
   const trackBottomRef = useRef<HTMLDivElement>(null);
@@ -60,11 +41,11 @@ export default function FilmStrip() {
       }
     });
     return () => ctx.revert();
-  }, []);
+  }, [data.photos]);
 
   return (
     <section id="photography" className="section" style={{ overflow: 'hidden', borderTop: 'var(--border-thick)' }}>
-      <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>04. Capturing Reality</h2>
+      <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>{data.heading}</h2>
       <div 
         ref={marqueeRef}
         style={{ 
@@ -94,15 +75,15 @@ export default function FilmStrip() {
             paddingLeft: '2rem'
           }}
         >
-          {[...FILM_DATA, ...FILM_DATA].map((data, idx) => (
+          {[...data.photos, ...data.photos].map((item, idx) => (
             <div 
               key={`top-${idx}`}
               className="card nav-link"
-              onClick={() => setActiveImageDetails(data)}
+              onClick={() => setActiveImageDetails(item)}
               style={{
                 width: '400px',
                 height: '250px',
-                backgroundImage: `url(${data.url})`,
+                backgroundImage: `url(${item.url})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 flexShrink: 0,
@@ -111,7 +92,7 @@ export default function FilmStrip() {
               }}
             >
                <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem' }}>
-                 <span className="font-mono" style={{ color: '#00FF41', fontWeight: 'bold' }}>{data.title}</span>
+                 <span className="font-mono" style={{ color: '#00FF41', fontWeight: 'bold' }}>{item.title}</span>
                </div>
             </div>
           ))}
@@ -127,15 +108,15 @@ export default function FilmStrip() {
             paddingLeft: '2rem'
           }}
         >
-          {[...FILM_DATA].reverse().concat([...FILM_DATA].reverse()).map((data, idx) => (
+          {[...data.photos].reverse().concat([...data.photos].reverse()).map((item, idx) => (
             <div 
               key={`bottom-${idx}`}
               className="card nav-link"
-              onClick={() => setActiveImageDetails(data)}
+              onClick={() => setActiveImageDetails(item)}
               style={{
                 width: '400px',
                 height: '250px',
-                backgroundImage: `url(${data.url})`,
+                backgroundImage: `url(${item.url})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 flexShrink: 0,
@@ -144,7 +125,7 @@ export default function FilmStrip() {
               }}
             >
                <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem' }}>
-                 <span className="font-mono" style={{ color: '#00FF41', fontWeight: 'bold' }}>{data.title}</span>
+                 <span className="font-mono" style={{ color: '#00FF41', fontWeight: 'bold' }}>{item.title}</span>
                </div>
             </div>
           ))}

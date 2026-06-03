@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 import SmoothScroller from '@/components/SmoothScroller'
 import ClientLayoutManager from '@/components/ClientLayoutManager'
-import Navbar from '@/components/Navbar'
 
 export const metadata: Metadata = {
   title: 'Niranjan S S | Portfolio',
@@ -17,7 +16,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <Navbar />
         <ClientLayoutManager />
         <SmoothScroller>
           {children}

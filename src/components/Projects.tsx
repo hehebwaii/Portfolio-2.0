@@ -1,81 +1,18 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FadeIn, LiveProjectButton } from '@/components/shared/DesignSystem';
-import { client, urlFor } from '@/sanity/lib/client';
-
-interface ProjectType {
-  index: string;
-  name: string;
-  category: string;
-  description: string;
-  href: string;
-  col1Image1?: any;
-  col1Image2?: any;
-  col2TallImage?: any;
-  fallbackImages: string[];
-}
-
-const DEFAULT_PROJECTS: ProjectType[] = [
-  {
-    index: '001',
-    category: 'Full-Stack Platform',
-    name: 'Sustaination',
-    description:
-      'A sustainability-focused social platform designed to track and gamify eco-conscious habits through community engagement and real-time data visualization.',
-    href: '#',
-    fallbackImages: [
-      'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
-      'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=800&q=80',
-      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80',
-    ],
-  },
-  {
-    index: '002',
-    category: 'Interactive Portfolio',
-    name: 'Portfolio v5',
-    description:
-      'A Neo-Brutalist developer portfolio featuring GSAP scroll-bound animations, BIOS boot sequences, CRT shader effects, and a fully interactive Engineering Command Deck.',
-    href: '#',
-    fallbackImages: [
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80',
-      'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80',
-    ],
-  },
-  {
-    index: '003',
-    category: 'Community Initiative',
-    name: 'Young Innovators',
-    description:
-      'An IoT-integrated educational framework empowering student engineers with hands-on embedded systems workshops, Arduino labs, and competitive hackathon infrastructure.',
-    href: '#',
-    fallbackImages: [
-      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80',
-      'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80',
-      'https://images.unsplash.com/photo-1562408590-e32931084e23?w=1200&q=80',
-    ],
-  },
-];
-
-const getImageUrl = (image: any, fallbackUrl: string) => {
-  if (!image) return fallbackUrl;
-  try {
-    return urlFor(image).url() || fallbackUrl;
-  } catch (err) {
-    return fallbackUrl;
-  }
-};
+import type { ProjectsData, ProjectCard } from '@/app/page';
 
 // Individual Project Card with sticky stacking + scale transform
-interface ProjectCardProps {
-  project: ProjectType;
+interface ProjectCardComponentProps {
+  project: ProjectCard;
   index: number;
   totalCards: number;
 }
 
-function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
+function ProjectCardComponent({ project, index, totalCards }: ProjectCardComponentProps) {
   const cardContainerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -83,13 +20,8 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
     offset: ['start end', 'start start'],
   });
 
-  // Scale target interpolation: e.g. Card 0: 0.94, Card 1: 0.97, Card 2: 1.00
   const targetScale = 1 - (totalCards - 1 - index) * 0.03;
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
-
-  const img1 = getImageUrl(project.col1Image1, project.fallbackImages[0]);
-  const img2 = getImageUrl(project.col1Image2, project.fallbackImages[1]);
-  const img3 = getImageUrl(project.col2TallImage, project.fallbackImages[2]);
 
   return (
     <div
@@ -137,7 +69,6 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
               flexWrap: 'wrap',
             }}
           >
-            {/* Index Tag */}
             <span
               className="font-mono"
               style={{
@@ -149,7 +80,6 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
               #{project.index}
             </span>
 
-            {/* Category Badge */}
             <span
               className="font-mono"
               style={{
@@ -166,7 +96,6 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
               {project.category}
             </span>
 
-            {/* Project Name */}
             <h3
               style={{
                 color: '#D7E2EA',
@@ -181,7 +110,7 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
             </h3>
           </div>
 
-          <LiveProjectButton href={project.href} label="LIVE PROJECT" />
+          <LiveProjectButton href={project.liveUrl} label="LIVE PROJECT" />
         </div>
 
         {/* Card Body — Description */}
@@ -200,7 +129,7 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
               margin: 0,
             }}
           >
-            {project.description}
+            {project.description || 'No description available.'}
           </p>
         </div>
 
@@ -232,7 +161,7 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
               }}
             >
               <img
-                src={img1}
+                src={project.col1Image1}
                 alt={`${project.name} preview 1`}
                 loading="lazy"
                 style={{
@@ -252,7 +181,7 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
               }}
             >
               <img
-                src={img2}
+                src={project.col1Image2}
                 alt={`${project.name} preview 2`}
                 loading="lazy"
                 style={{
@@ -275,7 +204,7 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
             }}
           >
             <img
-              src={img3}
+              src={project.col2TallImage}
               alt={`${project.name} hero image`}
               loading="lazy"
               style={{
@@ -308,42 +237,12 @@ function ProjectCard({ project, index, totalCards }: ProjectCardProps) {
   );
 }
 
-export default function Projects() {
-  const [projects, setProjects] = useState<ProjectType[]>([]);
+interface ProjectsProps {
+  data: ProjectsData;
+}
 
-  useEffect(() => {
-    let isMounted = true;
-    client.fetch(`*[_type == "project"] | order(index asc)`)
-      .then((data) => {
-        if (data && Array.isArray(data) && data.length > 0 && isMounted) {
-          const mapped = data.map((p: any, idx: number) => ({
-            index: p.index || `00${idx + 1}`,
-            name: p.name || 'Project Name',
-            category: p.category || 'Category',
-            description: p.description || '',
-            href: p.liveUrl || '#',
-            col1Image1: p.col1Image1,
-            col1Image2: p.col1Image2,
-            col2TallImage: p.col2TallImage,
-            // Fall back to default project static images in circular order if out of bounds
-            fallbackImages: DEFAULT_PROJECTS[idx % DEFAULT_PROJECTS.length].fallbackImages,
-          }));
-          setProjects(mapped);
-        } else if (isMounted) {
-          setProjects(DEFAULT_PROJECTS);
-        }
-      })
-      .catch((err) => {
-        console.error("Sanity fetch failed in Projects, using local fallbacks:", err);
-        if (isMounted) {
-          setProjects(DEFAULT_PROJECTS);
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+export default function Projects({ data }: ProjectsProps) {
+  const { sectionHeading, cards } = data;
 
   return (
     <section
@@ -379,7 +278,7 @@ export default function Projects() {
             backgroundClip: 'text',
           }}
         >
-          Projects
+          {sectionHeading}
         </h2>
         <p
           className="font-mono"
@@ -391,7 +290,7 @@ export default function Projects() {
             marginTop: '1rem',
           }}
         >
-          Featured work & case studies
+          Featured work &amp; case studies
         </p>
       </FadeIn>
 
@@ -402,12 +301,12 @@ export default function Projects() {
           margin: '0 auto',
         }}
       >
-        {projects.map((project, i) => (
-          <ProjectCard 
-            key={i} 
-            project={project} 
-            index={i} 
-            totalCards={projects.length}
+        {cards.map((project, i) => (
+          <ProjectCardComponent
+            key={i}
+            project={project}
+            index={i}
+            totalCards={cards.length}
           />
         ))}
       </div>

@@ -4,10 +4,15 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAppStore } from '@/store/useAppStore';
+import type { CameraSequenceData } from '@/app/page';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ScrollCanvasSequence() {
+interface ScrollCanvasSequenceProps {
+  data: CameraSequenceData;
+}
+
+export default function ScrollCanvasSequence({ data }: ScrollCanvasSequenceProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const act1Ref = useRef<HTMLDivElement>(null);
@@ -19,9 +24,10 @@ export default function ScrollCanvasSequence() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
 
-  // Preload all 192 frames on mount
+  const { totalFrames, act1Title, act1Subtitle, act2Title, act2Subtitle, act3Title, act3Subtitle } = data;
+
+  // Preload all frames on mount
   useEffect(() => {
-    const totalFrames = 192;
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
@@ -42,7 +48,7 @@ export default function ScrollCanvasSequence() {
       loadedImages.push(img);
     }
     setImages(loadedImages);
-  }, []);
+  }, [totalFrames]);
 
   // Initialize ScrollTrigger animation once all images are loaded
   useEffect(() => {
@@ -73,8 +79,8 @@ export default function ScrollCanvasSequence() {
         scrub: true,
         onUpdate: (self) => {
           const progress = self.progress;
-          // Map scroll progress (0-1) to frame indices (0-191)
-          const frameIndex = Math.min(191, Math.floor(progress * 192));
+          // Map scroll progress (0-1) to frame indices (0 to totalFrames - 1)
+          const frameIndex = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
           const currentImg = images[frameIndex];
           if (currentImg && ctx) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -90,15 +96,15 @@ export default function ScrollCanvasSequence() {
       y: 20 
     });
 
-    // ACT 1: Frames 001 to 060 (Timeline Progress: ~0.0 to ~0.31)
+    // ACT 1: Timeline Progress: ~0.0 to ~0.31
     tl.to(act1Ref.current, { opacity: 1, y: 0, duration: 0.1 }, 0)
       .to(act1Ref.current, { opacity: 0, y: -20, duration: 0.1 }, 0.28);
 
-    // ACT 2: Frames 065 to 125 (Timeline Progress: ~0.34 to ~0.65)
+    // ACT 2: Timeline Progress: ~0.34 to ~0.65
     tl.to(act2Ref.current, { opacity: 1, y: 0, duration: 0.1 }, 0.35)
       .to(act2Ref.current, { opacity: 0, y: -20, duration: 0.1 }, 0.62);
 
-    // ACT 3: Frames 130 to 192 (Timeline Progress: ~0.68 to ~1.0)
+    // ACT 3: Timeline Progress: ~0.68 to ~1.0
     tl.to(act3Ref.current, { opacity: 1, y: 0, duration: 0.1 }, 0.68);
 
     return () => {
@@ -107,7 +113,7 @@ export default function ScrollCanvasSequence() {
         if (t.trigger === containerRef.current) t.kill();
       });
     };
-  }, [imagesLoaded, images]);
+  }, [imagesLoaded, images, totalFrames]);
 
   const activeColor = isOverclocked ? '#00FF41' : '#FF3B30';
 
@@ -202,10 +208,10 @@ export default function ScrollCanvasSequence() {
                   </span>
                 </div>
                 <h3 className="sequence-title font-mono">
-                  01 // THE SENSOR MATRIX — SONY α6400
+                  {act1Title}
                 </h3>
                 <p className="sequence-desc">
-                  An engineering baseline capturing raw ambient data at 24.2 megapixels. High-speed phase detection meets compressed visual telemetry.
+                  {act1Subtitle}
                 </p>
               </div>
 
@@ -227,10 +233,10 @@ export default function ScrollCanvasSequence() {
                   </span>
                 </div>
                 <h3 className="sequence-title font-mono">
-                  02 // TACTICAL FIELD SELECTION — E 16-50MM
+                  {act2Title}
                 </h3>
                 <p className="sequence-desc">
-                  The everyday kit architecture built for split-second deployment. Mechanical power-zoom mapping immediate world space from wide angles to compression.
+                  {act2Subtitle}
                 </p>
               </div>
 
@@ -252,10 +258,10 @@ export default function ScrollCanvasSequence() {
                   </span>
                 </div>
                 <h3 className="sequence-title font-mono">
-                  03 // COMPOSITION GEOMETRY — VILTROX 20MM PRIME
+                  {act3Title}
                 </h3>
                 <p className="sequence-desc">
-                  Ultra-wide narrative rendering at f/2.8. Gathering expansive low-light environments with absolute sharpness across the focal plane.
+                  {act3Subtitle}
                 </p>
               </div>
 

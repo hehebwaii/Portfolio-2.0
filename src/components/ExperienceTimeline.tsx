@@ -3,24 +3,18 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useAppStore } from '@/store/useAppStore';
+import type { ExperienceTimelineData } from '@/app/page';
 
-const TIMELINE_DATA = [
-  { id: 'btech', title: "B.Tech Electronics & Communication Engineering – College", date: "2023-2027", active: true, detail: "Pursuing undergraduate studies with a rigorous focus on hardware logic, embedded architecture, and full-stack software pipelines." },
-  { id: 'ieee', title: "Membership Development Coordinator – IEEE", date: "2026-Present", active: true, detail: "Architected promotional systems and scaled onboarding metrics across international organizational vectors." },
-  { id: 'enix', title: "Media Operations – eNIX", date: "2025-Present", active: true, detail: "Orchestrated visual identity for ECE's biggest installations from Elevate to Adharva. Negotiated and secured two key corporate institutional sponsorships." },
-  { id: 'nss', title: "Rudhirasena Unit Coordinator – NSS", date: "2026-Present", active: true, detail: "Strategized and coordinated urgent multi-unit blood donation lifelines directly to the Regional Cancer Centre (RCC) and SCT. Documented 4-time active donor." },
-  { id: 'frames', title: "Creative Curator – FRAMES", date: "2025-Present", active: true, detail: "Entrusted with capturing the pulse of flagship corporate and artistic events, translating fleeting moments at Crossroads into permanent visual legacies." },
-  { id: 'openlabs', title: "Media Team – OpenLabs AI Club", date: "Past Track", active: false, detail: "Managed media strategy, visual asset creation, and algorithmic design pipelines for emerging club ecosystems." },
-  { id: 'filmclub', title: "Execom Member – Film Club", date: "Past Track", active: false, detail: "Directed asset generation, cinematic layouts, and promotional framework coordination for institutional film media deployments." },
-  { id: 'tribe', title: "Emerging Professional – TRIBE IEDC", date: "2025-2026", active: false, detail: "Gained foundational structural alignment across layout design, field photography, and video post-production." }
-];
+interface ExperienceTimelineProps {
+  data: ExperienceTimelineData;
+}
 
-export default function ExperienceTimeline() {
+export default function ExperienceTimeline({ data }: ExperienceTimelineProps) {
   const { openPositions, togglePosition } = useAppStore();
   const detailsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   useEffect(() => {
-    TIMELINE_DATA.forEach((item) => {
+    data.items.forEach((item) => {
       const el = detailsRef.current[item.id];
       if (!el) return;
 
@@ -30,11 +24,11 @@ export default function ExperienceTimeline() {
         gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: 'power2.in', marginTop: 0 });
       }
     });
-  }, [openPositions]);
+  }, [openPositions, data.items]);
 
   return (
     <section id="experience" className="section" style={{ borderTop: 'var(--border-thick)' }}>
-      <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>03. Routing Connections</h2>
+      <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>{data.sectionHeading}</h2>
       
       <div style={{ position: 'relative', maxWidth: '900px', margin: '0 auto', paddingLeft: '2rem' }}>
         {/* Structural Line */}
@@ -50,7 +44,7 @@ export default function ExperienceTimeline() {
         />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-          {TIMELINE_DATA.map((item) => {
+          {data.items.map((item) => {
             const isOpen = !!openPositions[item.id];
             
             return (
