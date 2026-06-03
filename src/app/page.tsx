@@ -169,7 +169,7 @@ const DEFAULT_NAVIGATION: NavigationSettingsData = {
     { label: 'Identity', slug: '#about' },
     { label: 'Skills', slug: '#skills' },
     { label: 'Timeline', slug: '#experience' },
-    { label: 'Lens', slug: '#photography' },
+    { label: 'Lens', slug: '#camerasequence' },
     { label: 'Benchmarks', slug: '#achievements' },
     { label: 'Contact', slug: '#contact' },
   ],

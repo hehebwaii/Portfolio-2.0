@@ -120,7 +120,7 @@ export default function ScrollCanvasSequence({ data }: ScrollCanvasSequenceProps
   return (
     <div 
       ref={containerRef} 
-      id="scroll-sequence-container"
+      id="camerasequence"
       style={{ 
         height: '400vh', 
         position: 'relative', 

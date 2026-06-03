@@ -1,6 +1,6 @@
 {
   "biosBoot": {
-    "kernelVersion": "SYSTEM: KERNEL v2.0.26 ASSEMBLY",
+    "kernelVersion": "",
     "diagnosticLines": [
       "HARDWARE: SONY ILCE-6400 SYSTEM INIT ... OK",
       "NETWORK: SYSTEMS ... ALIGNED",
@@ -8,7 +8,7 @@
       "DATABASE: FIRESTORE SYNC ... OK",
       "DATA: ESTABLISHING TINA CMS LOCAL LINK ... OK"
     ],
-    "completionTime": 2500,
+    "completionTime": 500,
     "copyrightText": "COPYRIGHT (C) 2026 SYS.N SYSTEMS CO. ALL RIGHTS RESERVED.",
     "loadingText": "RUNNING HARDWARE CHECK... STATUS: ",
     "loadedText": "SYSTEM INITIALIZATION COMPLETE. DISPATCHING SCROLL_UNLOCK...",
@@ -39,7 +39,7 @@
       },
       {
         "label": "Lens",
-        "slug": "#photography"
+        "slug": "#camerasequence"
       },
       {
         "label": "Contact",
@@ -243,13 +243,27 @@
     {
       "sectionKey": "about"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {}
+    {
+      "sectionKey": "skills"
+    },
+    {
+      "sectionKey": "timeline"
+    },
+    {
+      "sectionKey": "services"
+    },
+    {
+      "sectionKey": "projects"
+    },
+    {
+      "sectionKey": "canvas"
+    },
+    {
+      "sectionKey": "filmstrip"
+    },
+    {
+      "sectionKey": "achievements"
+    }
   ],
   "timeline": {
     "sectionHeading": "Routing Connections",
@@ -314,13 +328,13 @@
   },
   "aboutProfile": {
     "location": "THIRUVANANTHAPURAM, KERALA",
-    "networkLabel": "LINKEDIN UPLINK",
-    "networkUrl": "https://linkedin.com",
+    "networkLabel": "LINKEDIN",
+    "networkUrl": "https://linkedin.com/niranjanss",
     "languages": [
-      "C/C++",
-      "JavaScript",
-      "TypeScript",
-      "Python"
+      "Malayalam",
+      "Tamil",
+      "Hindi",
+      "English"
     ],
     "story": "Second-year B.Tech Electronics and Communication Engineering student at Mar Baselios College of Engineering and Technology. I bridge hardware systems with high-performance interactive web pipelines."
   },
