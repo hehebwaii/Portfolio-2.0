@@ -48,7 +48,7 @@
     ]
   },
   "hero": {
-    "mainTitle": "NIRANJAN S S",
+    "mainTitle": "NIRANJAN S S ",
     "subtitle": "Second-year B.Tech ECE undergraduate bridging systems design with interactive media pipelines.",
     "signatureSvgPath": "M 10 80 Q 52.5 10, 95 80 T 180 80",
     "signatureScaleMobile": 80,
@@ -237,14 +237,15 @@
     ]
   },
   "sectionOrder": [
-    "about",
     "skills",
     "timeline",
     "canvas",
     "services",
     "projects",
     "filmstrip",
-    "achievements"
+    "achievements",
+    "hero",
+    "about"
   ],
   "timeline": {
     "sectionHeading": "Routing Connections",
@@ -252,7 +253,7 @@
       {
         "id": "btech",
         "title": "B.Tech Electronics & Communication Engineering – College",
-        "date": "2023-2027",
+        "date": "2024-2028",
         "active": true,
         "detail": "Pursuing undergraduate studies with a rigorous focus on hardware logic, embedded architecture, and full-stack software pipelines."
       },
@@ -287,15 +288,15 @@
       {
         "id": "openlabs",
         "title": "Media Team – OpenLabs AI Club",
-        "date": "Past Track",
-        "active": false,
+        "date": "2026-Present",
+        "active": true,
         "detail": "Managed media strategy, visual asset creation, and algorithmic design pipelines for emerging club ecosystems."
       },
       {
         "id": "filmclub",
         "title": "Execom Member – Film Club",
-        "date": "Past Track",
-        "active": false,
+        "date": "2026-Present",
+        "active": true,
         "detail": "Directed asset generation, cinematic layouts, and promotional framework coordination for institutional film media deployments."
       },
       {
@@ -349,19 +350,14 @@
     "heading": "MILESTONES",
     "benchmarks": [
       {
-        "title": "IEEE WIE Coordinator",
-        "date": "2026-2027",
-        "description": "Appointed as Membership Development Coordinator."
-      },
-      {
-        "title": "ENIX EXECOM",
-        "date": "March 2026",
-        "description": "Coordinated the departmental technical fest."
-      },
-      {
         "title": "Smart India Hackathon",
         "date": "September 2025",
         "description": "Developed Sustaination, a gamified sustainable farming platform."
+      },
+      {
+        "title": "Frame-It",
+        "date": "March 2026",
+        "description": "Won the 1st place."
       }
     ]
   }

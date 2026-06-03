@@ -86,7 +86,7 @@ export default function Hero({ data }: HeroProps) {
       >
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 3024 1045" preserveAspectRatio="xMidYMid meet" fill="none" style={{ filter: 'drop-shadow(3px 3px 0px var(--color-accent))', background: 'transparent', height: 'auto' }}>
           {signatureSvgPath ? (
-            <g transform="rotate(180 1512 522.5)">
+            <g>
               <path fill="var(--color-text)" d={signatureSvgPath} />
             </g>
           ) : (
