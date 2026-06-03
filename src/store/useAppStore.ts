@@ -15,7 +15,6 @@ interface AppState {
   isOverclocked: boolean;
   isDevMode: boolean;
   isRecruiterMode: boolean;
-  isEStopped: boolean;
   activeImage: string | null;
   activeImageDetails: ImageDetails | null;
   openPositions: Record<string, boolean>;
@@ -29,7 +28,6 @@ interface AppState {
   toggleDevMode: () => void;
   setDevMode: (isDevMode: boolean) => void;
   toggleRecruiterMode: () => void;
-  toggleEStop: () => void;
   setActiveImage: (imageUrl: string | null) => void;
   setActiveImageDetails: (details: ImageDetails | null) => void;
   closeOverlays: () => void;
@@ -44,7 +42,6 @@ export const useAppStore = create<AppState>((set) => ({
   isOverclocked: false,
   isDevMode: false,
   isRecruiterMode: false,
-  isEStopped: false,
   activeImage: null,
   activeImageDetails: null,
   openPositions: {},
@@ -69,16 +66,6 @@ export const useAppStore = create<AppState>((set) => ({
   setDevMode: (isDevMode) => set({ isDevMode }),
 
   toggleRecruiterMode: () => set((state) => ({ isRecruiterMode: !state.isRecruiterMode })),
-  
-  toggleEStop: () => set((state) => {
-    const nextState = !state.isEStopped;
-    if (nextState) {
-      gsap.globalTimeline.pause();
-    } else {
-      gsap.globalTimeline.play();
-    }
-    return { isEStopped: nextState };
-  }),
   
   setActiveImage: (imageUrl) => set({ activeImage: imageUrl }),
   setActiveImageDetails: (details) => set({ activeImageDetails: details }),

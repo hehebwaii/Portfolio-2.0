@@ -10,8 +10,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroller({ children }: { children: React.ReactNode }) {
   const isLoading = useAppStore((state) => state.isLoading);
+  const isRecruiterMode = useAppStore((state) => state.isRecruiterMode);
   const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
+    if (isRecruiterMode) {
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -24,29 +34,27 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    const tickHandler = (time: number) => {
+      if (lenisRef.current) {
+        lenisRef.current.raf(time * 1000);
+      }
+    };
 
+    gsap.ticker.add(tickHandler);
     gsap.ticker.lagSmoothing(0);
 
-    return () => {
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
-      lenis.destroy();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (lenisRef.current) {
-      if (isLoading) {
-        lenisRef.current.stop();
-      } else {
-        lenisRef.current.start();
-      }
+    if (isLoading) {
+      lenis.stop();
+    } else {
+      lenis.start();
     }
-  }, [isLoading]);
+
+    return () => {
+      gsap.ticker.remove(tickHandler);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, [isRecruiterMode, isLoading]);
 
   return <>{children}</>;
 }

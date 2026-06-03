@@ -92,7 +92,10 @@ export default function TerminalOverlay() {
         pointerEvents: isTerminalOpen ? 'auto' : 'none', // Ensure it doesn't block clicks when closed
       }}
     >
-      <div style={{ flex: 1, overflowY: 'auto', marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <div 
+        data-lenis-prevent="true"
+        style={{ flex: 1, overflowY: 'auto', marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+      >
         {history.map((line, i) => (
           <div key={i}>{line}</div>
         ))}

@@ -19,18 +19,25 @@ export default function SettingsDock() {
     alignItems: 'center'
   };
 
-  const buttonStyle = (isActive: boolean) => ({
+  const buttonStyle = (isActive: boolean, hasText = false) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '48px',
+    gap: hasText ? '0.5rem' : '0',
+    width: hasText ? 'auto' : '48px',
     height: '48px',
+    padding: hasText ? '0 1rem' : '0',
     backgroundColor: isActive ? 'var(--color-text)' : 'var(--color-bg)',
     color: isActive ? 'var(--color-bg)' : 'var(--color-text)',
     border: '2px solid var(--color-text)',
     cursor: 'none',
     transition: 'all 0.2s',
     boxShadow: '3px 3px 0px 0px var(--color-text)',
+    fontFamily: "'JetBrains Mono', monospace",
+    fontWeight: 700,
+    fontSize: '0.75rem',
+    textTransform: 'uppercase' as const,
+    whiteSpace: 'nowrap' as const,
   });
 
   return (
@@ -62,33 +69,37 @@ export default function SettingsDock() {
         opacity: isOpen ? 1 : 0,
         pointerEvents: isOpen ? 'auto' : 'none',
         transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+        transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        alignItems: 'center'
       }}>
         <button 
-          style={buttonStyle(isRecruiterMode)} 
+          style={buttonStyle(isRecruiterMode, true)} 
           onClick={toggleRecruiterMode}
           title="Toggle Recruiter Mode (Max Performance)"
           className="nav-link"
         >
-          <EyeOff size={24} />
+          <EyeOff size={20} />
+          <span>Recruiter Mode</span>
         </button>
 
         <button 
-          style={buttonStyle(isDevMode)} 
+          style={buttonStyle(isDevMode, true)} 
           onClick={toggleDevMode}
           title="Toggle Dev HUD"
           className="nav-link"
         >
-          <TerminalSquare size={24} />
+          <TerminalSquare size={20} />
+          <span>Dev HUD</span>
         </button>
 
         <button 
-          style={buttonStyle(isOverclocked)} 
+          style={buttonStyle(isOverclocked, true)} 
           onClick={toggleOverclock}
           title="Toggle Overclock Mode"
           className="nav-link"
         >
-          <Zap size={24} />
+          <Zap size={20} />
+          <span>Overclock</span>
         </button>
       </div>
     </div>

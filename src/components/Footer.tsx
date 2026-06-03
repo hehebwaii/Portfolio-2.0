@@ -8,9 +8,16 @@ import { useAppStore } from '@/store/useAppStore';
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const [showPrivacy, setShowPrivacy] = useState(false);
-  const { toggleEStop } = useAppStore();
+  const isRecruiterMode = useAppStore((state) => state.isRecruiterMode);
 
   useEffect(() => {
+    if (isRecruiterMode) {
+      if (footerRef.current) {
+        gsap.set(footerRef.current, { clearProps: 'y' });
+      }
+      return;
+    }
+
     const ctx = gsap.context(() => {
       if (footerRef.current) {
         gsap.fromTo(footerRef.current,
@@ -30,7 +37,7 @@ export default function Footer() {
     }, footerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isRecruiterMode]);
 
   return (
     <>
@@ -96,40 +103,7 @@ export default function Footer() {
             © {new Date().getFullYear()} NIRANJAN S S. ALL RIGHTS RESERVED.
           </span>
 
-          {/* E-Stop Control Block */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', border: '3px solid var(--color-text)', padding: '0.5rem 1rem', backgroundColor: '#FFD700', color: '#000', boxShadow: '3px 3px 0px #000' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span className="font-mono" style={{ fontWeight: 900, fontSize: '0.75rem', textTransform: 'uppercase' }}>SYSTEM E-STOP</span>
-              <span className="font-mono" style={{ fontSize: '0.65rem', opacity: 0.8, textTransform: 'uppercase' }}>PAUSE RUNTIME TWEEES</span>
-            </div>
-            <button 
-              onClick={() => toggleEStop()}
-              className="cursor-text-override"
-              style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '50%',
-                border: '2px solid #000',
-                background: 'repeating-linear-gradient(45deg, #000, #000 6px, #FFD700 6px, #FFD700 12px)',
-                boxShadow: '2px 2px 0px #000',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                outline: 'none'
-              }}
-              title="EMERGENCY STOP TIMELINE FREEZE"
-            >
-              <div style={{
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                backgroundColor: '#FF3B30',
-                border: '2px solid #000',
-                boxShadow: 'inset 1px 1px 2px rgba(255,255,255,0.5)'
-              }} />
-            </button>
-          </div>
+
 
           <button onClick={() => setShowPrivacy(true)} className="nav-link font-mono" style={{ background: 'none', border: 'none', fontWeight: 'bold', textDecoration: 'underline', color: 'inherit' }}>
             [PRIVACY_POLICY]

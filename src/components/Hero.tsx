@@ -61,15 +61,7 @@ export default function Hero() {
       
       {/* Signature Dev Portal */}
       <div 
-        style={{ 
-          position: 'absolute', 
-          right: '10%', 
-          bottom: '10%', 
-          zIndex: 20, 
-          cursor: 'none',
-          padding: '1rem',
-          width: '300px'
-        }}
+        className="signature-wrapper"
         onClick={() => registerSignatureClick()}
         title="Niranjan S S"
       >
@@ -88,6 +80,33 @@ export default function Hero() {
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes blink {
           50% { opacity: 0; }
+        }
+
+        .signature-wrapper {
+          position: absolute;
+          right: 10%;
+          bottom: 10%;
+          z-index: 20;
+          cursor: none;
+          padding: 1rem;
+          width: 300px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        @media (max-width: 768px) {
+          .signature-wrapper {
+            position: absolute !important;
+            left: 50% !important;
+            right: auto !important;
+            bottom: 5% !important;
+            transform: translateX(-50%) !important;
+            width: 80% !important;
+            max-width: 400px !important;
+            margin: 0 auto !important;
+            padding: 0.5rem !important;
+          }
         }
       `}} />
     </section>

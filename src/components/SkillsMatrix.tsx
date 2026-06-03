@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useAppStore } from '@/store/useAppStore';
 
 const SKILLS_DATA = [
   {
@@ -59,8 +60,19 @@ const SKILLS_DATA = [
 
 export default function SkillsMatrix() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isRecruiterMode = useAppStore((state) => state.isRecruiterMode);
 
   useEffect(() => {
+    if (isRecruiterMode) {
+      // Direct instant/smooth animation to target width when ScrollTrigger is disabled
+      const bars = gsap.utils.toArray<HTMLElement>('.skill-progress-bar');
+      bars.forEach((bar) => {
+        const targetWidth = bar.getAttribute('data-target-width');
+        gsap.to(bar, { width: `${targetWidth}%`, duration: 0.5, ease: "power3.out" });
+      });
+      return;
+    }
+
     const ctx = gsap.context(() => {
       const bars = gsap.utils.toArray<HTMLElement>('.skill-progress-bar');
       
@@ -80,7 +92,7 @@ export default function SkillsMatrix() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isRecruiterMode]);
 
   return (
     <section id="skills" className="section" style={{ borderTop: 'var(--border-thick)', backgroundColor: 'var(--color-bg)' }}>

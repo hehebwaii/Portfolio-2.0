@@ -94,6 +94,7 @@ export default function ImageModal() {
 
         {/* Metadata Panel */}
         <div 
+          data-lenis-prevent="true"
           style={{ 
             pointerEvents: 'auto',
             flex: '1 1 50%', 

@@ -180,34 +180,9 @@ export default function ScrollCanvasSequence() {
         }} />
 
         {/* Neo-Brutalist Narrative Card Overlay */}
-        <div style={{ 
-          position: 'absolute', 
-          inset: 0, 
-          pointerEvents: 'none', 
-          zIndex: 10,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          paddingLeft: '5%',
-          paddingRight: '5%'
-        }}>
-          <div 
-            className="card"
-            style={{ 
-              width: '100%',
-              maxWidth: '480px',
-              backgroundColor: 'rgba(5, 5, 5, 0.85)', 
-              color: 'var(--color-text)',
-              border: 'var(--border-thick)',
-              boxShadow: 'var(--shadow-brutal)',
-              padding: '2rem',
-              backdropFilter: 'blur(5px)',
-              pointerEvents: 'auto',
-              borderRadius: '0px',
-              borderColor: activeColor
-            }}
-          >
-            <div style={{ position: 'relative', width: '100%', height: '200px', overflow: 'hidden' }}>
+        <div className="sequence-overlay-container">
+          <div className="card sequence-narrative-card" style={{ borderColor: activeColor }}>
+            <div className="sequence-text-wrapper">
               
               {/* ACT 1 */}
               <div 
@@ -217,20 +192,19 @@ export default function ScrollCanvasSequence() {
                   inset: 0, 
                   display: 'flex', 
                   flexDirection: 'column', 
-                  gap: '0.75rem',
-                  textAlign: 'left'
+                  gap: '0.5rem'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="sequence-label-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <div className="status-led led-default" style={{ backgroundColor: activeColor }} />
-                  <span className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 900, color: activeColor, textTransform: 'uppercase' }}>
+                  <span className="sequence-label font-mono" style={{ color: activeColor }}>
                     ACT 1: THE OPTICAL CORE
                   </span>
                 </div>
-                <h3 className="font-mono" style={{ fontSize: '1.25rem', margin: 0, fontWeight: 900, color: '#ffffff' }}>
+                <h3 className="sequence-title font-mono">
                   01 // THE SENSOR MATRIX — SONY α6400
                 </h3>
-                <p style={{ fontSize: '0.9rem', lineHeight: '1.5', margin: 0, color: '#b7b9bb' }}>
+                <p className="sequence-desc">
                   An engineering baseline capturing raw ambient data at 24.2 megapixels. High-speed phase detection meets compressed visual telemetry.
                 </p>
               </div>
@@ -243,20 +217,19 @@ export default function ScrollCanvasSequence() {
                   inset: 0, 
                   display: 'flex', 
                   flexDirection: 'column', 
-                  gap: '0.75rem',
-                  textAlign: 'left'
+                  gap: '0.5rem'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="sequence-label-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <div className="status-led led-default" style={{ backgroundColor: activeColor }} />
-                  <span className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 900, color: activeColor, textTransform: 'uppercase' }}>
+                  <span className="sequence-label font-mono" style={{ color: activeColor }}>
                     ACT 2: THE ADAPTABLE RANGE
                   </span>
                 </div>
-                <h3 className="font-mono" style={{ fontSize: '1.25rem', margin: 0, fontWeight: 900, color: '#ffffff' }}>
+                <h3 className="sequence-title font-mono">
                   02 // TACTICAL FIELD SELECTION — E 16-50MM
                 </h3>
-                <p style={{ fontSize: '0.9rem', lineHeight: '1.5', margin: 0, color: '#b7b9bb' }}>
+                <p className="sequence-desc">
                   The everyday kit architecture built for split-second deployment. Mechanical power-zoom mapping immediate world space from wide angles to compression.
                 </p>
               </div>
@@ -269,20 +242,19 @@ export default function ScrollCanvasSequence() {
                   inset: 0, 
                   display: 'flex', 
                   flexDirection: 'column', 
-                  gap: '0.75rem',
-                  textAlign: 'left'
+                  gap: '0.5rem'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="sequence-label-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <div className="status-led led-default" style={{ backgroundColor: activeColor }} />
-                  <span className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 900, color: activeColor, textTransform: 'uppercase' }}>
+                  <span className="sequence-label font-mono" style={{ color: activeColor }}>
                     ACT 3: THE DEEP PERSPECTIVE
                   </span>
                 </div>
-                <h3 className="font-mono" style={{ fontSize: '1.25rem', margin: 0, fontWeight: 900, color: '#ffffff' }}>
+                <h3 className="sequence-title font-mono">
                   03 // COMPOSITION GEOMETRY — VILTROX 20MM PRIME
                 </h3>
-                <p style={{ fontSize: '0.9rem', lineHeight: '1.5', margin: 0, color: '#b7b9bb' }}>
+                <p className="sequence-desc">
                   Ultra-wide narrative rendering at f/2.8. Gathering expansive low-light environments with absolute sharpness across the focal plane.
                 </p>
               </div>
@@ -291,6 +263,105 @@ export default function ScrollCanvasSequence() {
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        .sequence-overlay-container {
+          position: absolute;
+          top: 10%;
+          left: 10%;
+          z-index: 10;
+          pointer-events: none;
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          width: auto;
+          height: auto;
+        }
+
+        .sequence-narrative-card {
+          width: 100vw;
+          max-width: 480px;
+          background-color: rgba(5, 5, 5, 0.85) !important;
+          color: var(--color-text) !important;
+          border: var(--border-thick) !important;
+          box-shadow: var(--shadow-brutal) !important;
+          padding: 2rem !important;
+          backdrop-filter: blur(5px) !important;
+          pointer-events: auto;
+          border-radius: 0px !important;
+          text-align: left;
+        }
+
+        .sequence-text-wrapper {
+          position: relative;
+          width: 100%;
+          height: 180px;
+          overflow: hidden;
+        }
+
+        .sequence-label {
+          font-size: 0.75rem;
+          font-weight: 900;
+          text-transform: uppercase;
+        }
+
+        .sequence-title {
+          font-size: 1.25rem;
+          margin: 0;
+          font-weight: 900;
+          color: #ffffff;
+        }
+
+        .sequence-desc {
+          font-size: 0.9rem;
+          line-height: 1.4;
+          margin: 0;
+          color: #b7b9bb;
+        }
+
+        @media (max-width: 768px) {
+          .sequence-overlay-container {
+            top: auto !important;
+            bottom: 8% !important;
+            left: 5% !important;
+            right: 5% !important;
+            width: 90% !important;
+            margin: 0 auto !important;
+            justify-content: center !important;
+            align-items: center !important;
+          }
+
+          .sequence-narrative-card {
+            max-width: 100% !important;
+            padding: 1rem !important;
+            text-align: center !important;
+            box-shadow: none !important;
+            background-color: rgba(0, 0, 0, 0.8) !important;
+            border: 1px solid var(--color-text) !important;
+          }
+
+          .sequence-text-wrapper {
+            height: 130px !important;
+          }
+
+          .sequence-label-wrapper {
+            justify-content: center !important;
+          }
+
+          .sequence-label {
+            font-size: 0.65rem !important;
+          }
+
+          .sequence-title {
+            font-size: 1.05rem !important;
+          }
+
+          .sequence-desc {
+            font-size: 0.8rem !important;
+            line-height: 1.35 !important;
+          }
+        }
+      `}} />
     </div>
   );
 }

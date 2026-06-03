@@ -3,8 +3,9 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { useAppStore } from '@/store/useAppStore';
+import { client } from '@/sanity/lib/client';
 
-const BOOT_LOGS = [
+const DEFAULT_LOGS = [
   "SYSTEM: KERNEL v2.0.26 ASSEMBLY ... OK",
   "HARDWARE: SONY ILCE-6400 SYSTEM INIT ... OK",
   "WEBGL: ATTACHING BACKGROUND 3D CANVAS CACHE ... OK",
@@ -14,24 +15,57 @@ const BOOT_LOGS = [
   "DIAGNOSTIC: ALL SYSTEMS OPERATIONAL."
 ];
 
+const DEFAULT_KERNEL_VERSION = "2.0.26";
+const DEFAULT_COMPLETION_TIME = 2200;
+
 export default function BiosBoot() {
   const [progress, setProgress] = useState(0);
   const [activeLogs, setActiveLogs] = useState<string[]>([]);
+  const [kernelVersion, setKernelVersion] = useState(DEFAULT_KERNEL_VERSION);
+  
+  const bootLogsRef = useRef<string[]>(DEFAULT_LOGS);
+  const completionTimeRef = useRef<number>(DEFAULT_COMPLETION_TIME);
   const containerRef = useRef<HTMLDivElement>(null);
   const setLoading = useAppStore((state) => state.setLoading);
 
+  // Fetch Sanity configuration
+  useEffect(() => {
+    let isMounted = true;
+    client.fetch(`*[_type == "biosBoot"][0]`)
+      .then((data) => {
+        if (data && isMounted) {
+          if (data.kernelVersion) {
+            setKernelVersion(data.kernelVersion);
+          }
+          if (data.diagnosticLines && Array.isArray(data.diagnosticLines) && data.diagnosticLines.length > 0) {
+            bootLogsRef.current = data.diagnosticLines;
+          }
+          if (typeof data.completionTime === 'number' && data.completionTime > 0) {
+            completionTimeRef.current = data.completionTime;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error("Sanity fetch failed in BiosBoot, using local retro fallbacks:", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Progress animation tick
   useEffect(() => {
     let currentProgress = 0;
-    
-    const interval = setInterval(() => {
+    let timerId: NodeJS.Timeout;
+
+    const runTick = () => {
+      // Increments by 2% to 7% per step
       currentProgress += Math.floor(Math.random() * 6) + 2;
-      
+
       if (currentProgress >= 100) {
         currentProgress = 100;
-        clearInterval(interval);
-        
-        // Final log
-        setActiveLogs(BOOT_LOGS);
+        setActiveLogs(bootLogsRef.current);
         setProgress(100);
 
         // GSAP eject out of viewport
@@ -45,21 +79,36 @@ export default function BiosBoot() {
           }
         });
       } else {
-        // Build active logs array based on progress thresholds
+        const currentLogs = bootLogsRef.current;
+        const logsCount = currentLogs.length;
         const logsToShow: string[] = [];
-        if (currentProgress >= 15) logsToShow.push(BOOT_LOGS[0]);
-        if (currentProgress >= 35) logsToShow.push(BOOT_LOGS[1]);
-        if (currentProgress >= 55) logsToShow.push(BOOT_LOGS[2]);
-        if (currentProgress >= 70) logsToShow.push(BOOT_LOGS[3]);
-        if (currentProgress >= 85) logsToShow.push(BOOT_LOGS[4]);
-        if (currentProgress >= 95) logsToShow.push(BOOT_LOGS[5]);
-        
+
+        // Distribute log entries across progress thresholds
+        for (let i = 0; i < logsCount; i++) {
+          const threshold = ((i + 1) / logsCount) * 100;
+          if (currentProgress >= threshold) {
+            logsToShow.push(currentLogs[i]);
+          }
+        }
+
         setActiveLogs(logsToShow);
         setProgress(currentProgress);
-      }
-    }, 45);
 
-    return () => clearInterval(interval);
+        // Calculate next step speed dynamically based on completionTime
+        const averageSteps = 22;
+        const stepDuration = Math.max(10, Math.floor(completionTimeRef.current / averageSteps));
+        timerId = setTimeout(runTick, stepDuration);
+      }
+    };
+
+    const startTimeout = setTimeout(() => {
+      runTick();
+    }, 50);
+
+    return () => {
+      clearTimeout(startTimeout);
+      clearTimeout(timerId);
+    };
   }, [setLoading]);
 
   return (
@@ -97,7 +146,7 @@ export default function BiosBoot() {
           position: 'relative'
         }}
       >
-        {/* Mock Energy Star / Custom Signature Badge in Top Right */}
+        {/* Custom Signature Badge in Top Right */}
         <div 
           style={{
             position: 'absolute',
@@ -112,7 +161,6 @@ export default function BiosBoot() {
             maxWidth: '300px'
           }}
         >
-          {/* Rotated Signature in Mini Size */}
           <div style={{ width: '80px', height: 'auto', opacity: 0.85 }}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" viewBox="0 0 3024 1045" preserveAspectRatio="xMidYMid meet" fill="none">
               <g transform="rotate(180 1512 522.5)">
@@ -126,13 +174,13 @@ export default function BiosBoot() {
             ___________<br />
             NIRANJAN S S<br />
             SYSTEMS ENG.<br />
-            v2.0.26-ENIX
+            v{kernelVersion}-ENIX
           </div>
         </div>
-
+        
         {/* Top Header */}
         <div style={{ borderBottom: '1px solid #00FF41', paddingBottom: '1rem' }}>
-          <div style={{ fontSize: '1.5rem', fontWeight: 900 }}>ENIX BIOS VERSION 2.0.26</div>
+          <div style={{ fontSize: '1.5rem', fontWeight: 900 }}>ENIX BIOS VERSION {kernelVersion}</div>
           <div style={{ fontSize: '0.875rem', opacity: 0.8, marginTop: '0.25rem' }}>
             COPYRIGHT (C) 2026 ENIX SYSTEMS CO. ALL RIGHTS RESERVED.
           </div>

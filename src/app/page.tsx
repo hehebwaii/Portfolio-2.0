@@ -6,6 +6,8 @@ import AboutProfile from '@/components/AboutProfile'
 import SkillsMatrix from '@/components/SkillsMatrix'
 import ExperienceTimeline from '@/components/ExperienceTimeline'
 import ScrollCanvasSequence from '@/components/ScrollCanvasSequence'
+import Services from '@/components/Services'
+import Projects from '@/components/Projects'
 import FilmStrip from '@/components/FilmStrip'
 import Achievements from '@/components/Achievements'
 import Footer from '@/components/Footer'
@@ -29,6 +31,8 @@ export default function Home() {
       {!isRecruiterMode && (
         <>
           <ScrollCanvasSequence />
+          <Services />
+          <Projects />
           <FilmStrip />
           <Achievements />
         </>
