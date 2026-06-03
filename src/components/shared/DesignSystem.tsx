@@ -248,3 +248,62 @@ export function LiveProjectButton({ href, label = 'LIVE PROJECT', className, onC
 
   return buttonContent;
 }
+
+// 5. ContactButton Component (Premium neobrutalist contact trigger)
+interface ContactButtonProps {
+  href?: string;
+  label?: string;
+  className?: string;
+  onClick?: () => void;
+}
+
+export function ContactButton({ href = 'https://linkedin.com/in/niranjanss/', label = 'SECURE CONTACT PORTAL', className, onClick }: ContactButtonProps) {
+  const buttonContent = (
+    <motion.button
+      onClick={onClick}
+      className={className}
+      style={{
+        position: 'relative',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '12px 24px',
+        borderRadius: '0px',
+        border: '3px solid #00FF41',
+        backgroundColor: '#000000',
+        color: '#00FF41',
+        fontFamily: "'JetBrains Mono', monospace",
+        fontWeight: 900,
+        fontSize: '0.85rem',
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+        overflow: 'hidden',
+        outline: 'none',
+        boxShadow: '4px 4px 0px #00FF41',
+        transition: 'transform 0.1s, box-shadow 0.1s',
+      }}
+      whileHover={{
+        transform: 'translate(-2px, -2px)',
+        boxShadow: '6px 6px 0px #00FF41',
+      }}
+      whileTap={{
+        transform: 'translate(2px, 2px)',
+        boxShadow: '2px 2px 0px #00FF41',
+      }}
+    >
+      <span style={{ position: 'relative', zIndex: 2 }}>{label}</span>
+    </motion.button>
+  );
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'inline-block' }}>
+        {buttonContent}
+      </a>
+    );
+  }
+
+  return buttonContent;
+}
+

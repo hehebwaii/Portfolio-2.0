@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAppStore } from '@/store/useAppStore';
 import type { FooterData } from '@/app/page';
+import { ContactButton } from '@/components/shared/DesignSystem';
 
 interface FooterProps {
   data: FooterData;
@@ -60,6 +61,9 @@ export default function Footer({ data }: FooterProps) {
             <p style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.25rem)' }}>
               Available for high-level systems architecture, visual storytelling, and organizational leadership roles.
             </p>
+            <div style={{ marginTop: '1rem' }}>
+              <ContactButton />
+            </div>
           </div>
 
           {/* Right Column: Form Portal */}
