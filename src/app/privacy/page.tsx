@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import PrivacyEscapeHandler from '@/components/PrivacyEscapeHandler';
 
 export const metadata = {
   title: 'Privacy Policy | Niranjan S S Portfolio',
@@ -10,20 +10,7 @@ export default function PrivacyPolicy() {
   return (
     <div style={{ backgroundColor: '#000000', color: '#ffffff', minHeight: '100vh', fontFamily: "'JetBrains Mono', monospace" }}>
       {/* Fixed top escape container */}
-      <div className="fixed top-0 left-0 w-full z-[99999] bg-black border-b border-green-500/30 p-4">
-        <Link 
-          href="/" 
-          className="block w-full text-center text-green-500 font-bold hover:bg-green-500 hover:text-black transition-colors p-4"
-          style={{
-            border: '2px solid #22c55e',
-            textDecoration: 'none',
-            fontSize: '1.1rem',
-            letterSpacing: '0.05em'
-          }}
-        >
-          ← RETURN TO MAIN DECK
-        </Link>
-      </div>
+      <PrivacyEscapeHandler />
 
       {/* Main content body */}
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-24 text-gray-300">
