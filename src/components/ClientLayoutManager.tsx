@@ -11,7 +11,17 @@ import SettingsDock from './SettingsDock';
 import ImageModal from './ImageModal';
 import VelocityMarquee from './VelocityMarquee';
 
-const BackgroundCanvas = dynamic(() => import('./BackgroundCanvas'), { ssr: false });
+const BackgroundCanvas = dynamic(
+  () => import('./BackgroundCanvas').catch((err) => {
+    console.warn("Dynamic chunk load failed, triggering full reload to sync assets:", err);
+    if (typeof window !== 'undefined') {
+      window.location.reload();
+    }
+    throw err;
+  }),
+  { ssr: false }
+);
+
 
 export default function ClientLayoutManager() {
   const { isOverclocked, isRecruiterMode, closeOverlays } = useAppStore();
