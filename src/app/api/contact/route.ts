@@ -34,7 +34,19 @@ export async function POST(request: Request) {
       }),
     });
 
-    const result = await response.json();
+    const contentType = response.headers.get('content-type');
+    let result: any = {};
+    
+    if (contentType && contentType.includes('application/json')) {
+      result = await response.json();
+    } else {
+      const text = await response.text();
+      console.error('Web3Forms returned non-JSON response:', text);
+      return NextResponse.json({ 
+        success: false, 
+        message: 'TRANSMISSION ROUTING FAILURE. HOST RESPONSE EXCEPTION.' 
+      }, { status: response.status });
+    }
 
     if (response.ok && result.success) {
       return NextResponse.json({ 

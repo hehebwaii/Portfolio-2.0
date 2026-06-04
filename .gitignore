@@ -32,12 +32,28 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+*.env
+*.env.local
+*.env.production
+*.env.development
+*.env.staging
 
-# vercel
-.vercel
+# local OS metadata
+.DS_Store
+Thumbs.db
+
+# local IDE states
+.idea/
+.vscode/
+
+# build caches
+.next/
+node_modules/
+dist/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
+# vercel
 .vercel
